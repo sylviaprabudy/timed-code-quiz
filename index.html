@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Timed Coding Quiz</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+</head>
+
+<body>
+    <header>
+        <div class="scores">
+            <a href="#">View high scores</a>
+        </div>
+        <div class="timer">
+            <p>Time: 75</p>
+        </div>
+    </header>
+    <div class="wrapper">
+        <div id="start-container" class="start-quiz">
+            <h1>Welcome to JavaScript Quiz Challenge</h1>
+            <p>
+                You have 75 seconds to try to get the highest score by answering five series of JavaScript
+                questions. Incorrect answers will penalize your time by ten seconds. Your total score will be your time
+                after you
+                answer the last question. Click start when you are ready.
+            </p>
+            <button id="start-btn" class="start-btn">Start Quiz</button>
+        </div>
+        <div id="question-container" class="hide">
+            <h1 id="question">Question</h1>
+            <div id="answer-buttons">
+                <button class="btn">Answer 1</button>
+                <button class="btn">Answer 2</button>
+                <button class="btn">Answer 3</button>
+                <button class="btn">Answer 4</a></button>
+            </div>
+            <h2>Correct!</h2>
+        </div>
+    </div>
+
+    <script src="./assets/js/questions.js"></script>
+    <script src="./assets/js/logic.js"></script>
+</body>
+
+</html>
