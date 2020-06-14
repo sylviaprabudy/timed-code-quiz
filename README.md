@@ -1,4 +1,4 @@
-# timed-code-quiz
+# Time Code Quiz - Web APIs Challenge
 a timed multiple-choice quiz on JavaScript fundamentals that stores high scores
 
 ## User Story
