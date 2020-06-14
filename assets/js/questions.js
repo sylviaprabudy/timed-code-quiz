@@ -3,42 +3,46 @@ var questions = [
     { 
         question: "How do you write 'Hello World' in an alert box?", 
         answers: [
-            { 1: "msg('Hello World')", correct: false },
-            { 2: "alert('Hello World')" , correct: true },
-            { 3: "prompt('Hello World')", correct: false },
-            { 4: "alertBox('Hello World')", correct: false},
+            { text: "msg('Hello World')", correct: false },
+            { text: "alert('Hello World')" , correct: true },
+            { text: "prompt('Hello World')", correct: false },
+            { text: "alertBox('Hello World')", correct: false}
         ]
     },
-    // { 
-    //     question: "Which of the following function of Array object calls a function for each element in the array?", 
-    //     1: "concat()",
-    //     2: "filter()",
-    //     3: "forEach()",
-    //     4: "split()",
-    //     answer: "3"
-    // },
-    // { 
-    //     question: "How to write an IF statement for executing some code if 'i' is NOT equal to 8?", 
-    //     1: "if (i != 8)",
-    //     2: "if i =! 8",
-    //     3: "if (i <> 8)",
-    //     4: "if (i !=== 8)",
-    //     answer: "1"
-    // },
-    // { 
-    //     question: "What is the correct way to write a JavaScript array?", 
-    //     1: "var vegetable = (0:'kale', 1:'lettuce', 2:'spinach')",
-    //     2: "var vegetable = ['kale', 'lettuce', 'spinach']",
-    //     3: "var vegetable = (kale, lettuce, spinach)",
-    //     4: "None of the above",
-    //     answer: "2"
-    // },
-    // { 
-    //     question: "How do you round the number 102.456, to the nearest integer?", 
-    //     1: "Math.random(102.456)",
-    //     2: "Math.rnd(102.456)",
-    //     3: "round(102.456)",
-    //     4: "None of the above",
-    //     answer: "4"
-    // },
+    { 
+        question: "Which of the following function of Array object calls a function for each element in the array?", 
+        answers: [
+            { text: "concat()", correct: false },
+            { text: "filter()", correct: false },
+            { text: "forEach()", correct: true},
+            { text: "split()", correct: false }
+        ]
+    },
+    { 
+        question: "How to write an IF statement for executing some code if 'i' is NOT equal to 8?", 
+        answers: [
+            { text: "if (i != 8)", correct: true },
+            { text: "if i =! 8", correct: false },
+            { text: "if (i <> 8)", correct: false },
+            { text: "if (i !=== 8)", correct: false }
+        ]
+    },
+    { 
+        question: "What is the correct way to write a JavaScript array?", 
+        answers: [
+            { text: "var vegetable = (0:'kale', 1:'lettuce', 2:'spinach')", correct: false },
+            { text: "var vegetable = ['kale', 'lettuce', 'spinach']", correct: true },
+            { text: "var vegetable = (kale, lettuce, spinach)", correct: false },
+            { text: "None of the above", correct: false }
+        ]
+    },
+    { 
+        question: "How do you round the number 102.456, to the nearest integer?",
+        answers: [
+            { text: "Math.random(102.456)", correct: false },
+            { text: "Math.rnd(102.456)", correct: false },
+            { text: "round(102.456)", correct: false },
+            { text: "None of the above", correct: true }
+        ]
+    },
 ];
