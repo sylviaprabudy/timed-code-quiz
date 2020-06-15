@@ -1,4 +1,4 @@
-// We start the quiz with a timer set to 75. Timer left also will be the final score.
+// Start the quiz with a timer set to 75. Timer left also will be the final score.
 var timeLeft = 75;
 var timerEl = document.getElementById("timer");
 var startButton = document.getElementById("start-btn");
@@ -8,6 +8,9 @@ var startContainerEl = document.getElementById("start-container");
 var questionEl = document.getElementById("question");
 var answerButtonsEl = document.getElementById("answer-buttons");
 var checkAnswerEl = document.getElementById("check-answer");
+var viewHighScores = document.getElementById("highscores-link");
+var submitButton = document.getElementById("submit-btn");
+
 var shuffledQuestions, currentQuestionIndex;
 
 // Countdown timer
@@ -15,12 +18,13 @@ function timer() {
     var timeInterval = setInterval(function () {
         timerEl.textContent = "Time: " + timeLeft;
         timeLeft--;
-        if (timeLeft === 0) {
+        if (timeLeft <= 0) {
             console.log("You are out of time");
-            //timerEl.textContent = "";
-            //clearInterval(timeInterval);
+            timerEl.textContent = "";
+            clearInterval(timeInterval);
+            saveScore();
         }
-    }, 1000)
+    }, 1000);
 }
 
 startButton.addEventListener("click", startGame);
@@ -31,7 +35,7 @@ nextButton.addEventListener("click", () => {
 
 // Start Quiz
 function startGame() {
-    startButton.classList.add("hide");
+    //startButton.classList.add("hide");
     startContainerEl.classList.add("hide");
     shuffledQuestions = questions.sort(() => Math.random() - .5)
     currentQuestionIndex = 0
@@ -47,7 +51,7 @@ function setNextQuestion() {
     showQuestion(shuffledQuestions[currentQuestionIndex]);
 }
 
-
+// Display questions
 function showQuestion(question) {
     questionEl.innerText = question.question
     question.answers.forEach(answer => {
@@ -65,7 +69,7 @@ function showQuestion(question) {
 // Reset state function
 function resetState() {
     //clearStatusClass(document.body)
-    nextButton.classList.add("hide")
+    //nextButton.classList.add("hide")
     checkAnswerEl.classList.add("hide")
     while (answerButtonsEl.firstChild) {
         answerButtonsEl.removeChild
@@ -95,12 +99,12 @@ function setStatusClass(element, correct) {
     clearStatusClass(element)
     if (correct) {
         element.classList.add("correct");
-        document.querySelector("#check-answer").textContent = "Correct!";
+        document.querySelector("#check-answer").textContent = "You got it right!";
     } else {
          // If the aswer is wrong, deduct time by 10
         timeLeft -= 10;
         element.classList.add("wrong");
-        document.querySelector("#check-answer").textContent = "Wrong!";
+        document.querySelector("#check-answer").textContent = "Sorry that was not the correct answer.";
     }
 }
 
@@ -109,3 +113,44 @@ function clearStatusClass(element) {
     element.classList.remove("correct");
     element.classList.remove("wrong");
 }
+
+// Save score
+function saveScore() {
+    document.getElementById("score-container").style.display = "inline-block";
+    document.getElementById("your-score").textContent =  score + " out of " + shuffledQuestions.length + " questions correct.";
+}
+
+
+// Show high scores
+function showHighScores(initials) {
+    document.getElementById("highscores").style.display = "inline-block";
+    document.getElementById("high-scores").style.display = "inline-block";
+  
+    var initials = localStorage.getItem("initials");
+    var score = localStorage.getItem("score");
+  
+    var initialsField = document.getElementById("initial1");
+    var scoreField = document.getElementById("score1");
+  
+    initialsField.textContent = initials;
+    scoreField.textContent = score;
+  
+    if (initials == null || score == null) {
+      document.getElementById("high-scores").style.display = "none";
+      document.getElementById("no-scores").style.display = "inline-block";
+    }
+     console.log(initials);
+     console.log(score);
+  };
+
+  
+// View high scores link
+viewHighScores.addEventListener("click", showHighScores);
+
+submitButton.addEventListener("click", function (event) {
+  event.preventDefault()
+  var initials = document.querySelector("#initials-field").value;
+  localStorage.setItem("initials", initials);
+  localStorage.setItem("score", score);
+  showHighScores();
+});

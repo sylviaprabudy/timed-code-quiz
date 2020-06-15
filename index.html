@@ -12,38 +12,64 @@
 <body>
     <header>
         <div class="scores">
-            <a href="#">View high scores</a>
+            <a id="highscores-link">View high scores</a>
         </div>
         <div id="timer" class="timer">
             Time: 75
         </div>
     </header>
-    <div class="wrapper">
-        <div id="start-container" class="start-quiz">
-            <h1>Welcome to JavaScript Quiz Challenge</h1>
-            <p>
-                You have 75 seconds to try to get the highest score by answering five
-                series of JavaScript questions. Incorrect answers will penalize your
-                time by ten seconds. Your total score will be your time after you
-                answer the last question. Click start when you are ready.
-            </p>
-            <button id="start-btn" class="start-btn">Start Quiz</button>
+
+    <section id="start-container" class="start-quiz">
+        <h1>Welcome to JavaScript Quiz Challenge</h1>
+        <p>
+            You have 75 seconds to try to get the highest score by answering five
+            series of JavaScript questions. Incorrect answers will penalize your
+            time by ten seconds. Your total score will be your time after you
+            answer the last question. Click start when you are ready.
+        </p>
+        <button id="start-btn" class="start-btn">Start Quiz</button>
+    </section>
+
+    <section id="question-container" class="hide">
+        <h1 id="question">Question</h1>
+        <div id="answer-buttons" class="btn-grid">
+            <button class="btn">Answer 1</button>
+            <button class="btn">Answer 2</button>
+            <button class="btn">Answer 3</button>
+            <button class="btn">Answer 4</button>
         </div>
-        <div id="question-container" class="hide">
-            <h1 id="question">Question</h1>
-            <div id="answer-buttons" class="btn-grid">
-                <button class="btn">Answer 1</button>
-                <button class="btn">Answer 2</button>
-                <button class="btn">Answer 3</button>
-                <button class="btn">Answer 4</button>
-            </div>
-            <h2 id="check-answer" class="correct-wrong hide"></h2>
-            <div class="controls">
-                <button id="next-btn" class="next-btn hide">Next</button>
-                
-            </div>
+        <h2 id="check-answer" class="correct-wrong hide"></h2>
+        <div class="controls">
+            <button id="next-btn" class="next-btn hide">Next</button>
         </div>
-    </div>
+    </section>
+
+    <section id="score-container" class="hide">
+        <form id="submit-form">
+            <h3 id="your-score"></h3>
+            <label id="initials-label">Save your score:</label>
+            <input type="text" id="initials-field" maxlength="3" placeholder="Enter your initials" />
+            <button id="submit-btn">Submit</button>
+        </form>
+    </section>
+
+    <section id="highscores" class="highscores-container hide">
+        <div id="high-scores">
+            <h1>Your Score</h1>
+            <ul class="score-list" id="score-list">
+                <li id="highscore" class="score-list-item">
+                    <div id="initial1" class="initials"></div>
+                    <div id="score1" class="score"></div>
+                </li>
+            </ul>
+            <h2>Refresh the page to begin.</h2>
+        </div>
+        <div id="no-scores">
+            <h2>
+                We don't have any scores yet. Please refresh the page to start.
+            </h2>
+        </div>
+    </section>
 
     <script src="./assets/js/questions.js"></script>
     <script src="./assets/js/logic.js"></script>
