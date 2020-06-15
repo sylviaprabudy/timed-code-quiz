@@ -14,32 +14,34 @@
         <div class="scores">
             <a href="#">View high scores</a>
         </div>
-        <div class="timer">
-            <p>Time: 75</p>
+        <div id="timer" class="timer">
+            Time: 75
         </div>
     </header>
     <div class="wrapper">
         <div id="start-container" class="start-quiz">
             <h1>Welcome to JavaScript Quiz Challenge</h1>
             <p>
-                You have 75 seconds to try to get the highest score by answering five series of JavaScript
-                questions. Incorrect answers will penalize your time by ten seconds. Your total score will be your time
-                after you
+                You have 75 seconds to try to get the highest score by answering five
+                series of JavaScript questions. Incorrect answers will penalize your
+                time by ten seconds. Your total score will be your time after you
                 answer the last question. Click start when you are ready.
             </p>
             <button id="start-btn" class="start-btn">Start Quiz</button>
         </div>
         <div id="question-container" class="hide">
             <h1 id="question">Question</h1>
-            <div id="answer-buttons">
+            <div id="answer-buttons" class="btn-grid">
                 <button class="btn">Answer 1</button>
                 <button class="btn">Answer 2</button>
                 <button class="btn">Answer 3</button>
                 <button class="btn">Answer 4</button>
             </div>
-            <button id="next-btn" class="next-btn btn hide">Next</button>
-            <h2 class="correct-wrong hide">Correct!</h2>
-            <h2 class="correct-wrong hide">Wrong!</h2>
+            <h2 id="check-answer" class="correct-wrong hide"></h2>
+            <div class="controls">
+                <button id="next-btn" class="next-btn hide">Next</button>
+                
+            </div>
         </div>
     </div>
 
