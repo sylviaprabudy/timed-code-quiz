@@ -6,7 +6,7 @@ var questions = [
             { text: "msg('Hello World')", correct: false },
             { text: "alert('Hello World')" , correct: true },
             { text: "prompt('Hello World')", correct: false },
-            { text: "alertBox('Hello World')", correct: false}
+            { text: "alertBox('Hello World')", correct: false }
         ]
     },
     { 
@@ -14,7 +14,7 @@ var questions = [
         answers: [
             { text: "concat()", correct: false },
             { text: "filter()", correct: false },
-            { text: "forEach()", correct: true},
+            { text: "forEach()", correct: true },
             { text: "split()", correct: false }
         ]
     },

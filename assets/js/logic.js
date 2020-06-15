@@ -11,6 +11,7 @@ var checkAnswerEl = document.getElementById("check-answer");
 var viewHighScores = document.getElementById("highscores-link");
 var submitButton = document.getElementById("submit-btn");
 
+
 var shuffledQuestions, currentQuestionIndex;
 
 // Countdown timer
@@ -18,6 +19,7 @@ function timer() {
     var timeInterval = setInterval(function () {
         timerEl.textContent = "Time: " + timeLeft;
         timeLeft--;
+        //console.log(timeLeft)
         if (timeLeft <= 0) {
             console.log("You are out of time");
             timerEl.textContent = "";
@@ -25,6 +27,7 @@ function timer() {
             saveScore();
         }
     }, 1000);
+    return timeLeft;
 }
 
 startButton.addEventListener("click", startGame);
@@ -81,7 +84,7 @@ function resetState() {
 function selectAnswer(e) {
     var selectedButton = e.target;
     var correct = selectedButton.dataset.correct;
-    // setStatusClass(document.body, correct);
+     //setStatusClass(document.body, correct);
     Array.from(answerButtonsEl.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
@@ -97,6 +100,7 @@ function selectAnswer(e) {
 // Check and show the correct answer
 function setStatusClass(element, correct) {
     clearStatusClass(element)
+    console.log(correct);
     if (correct) {
         element.classList.add("correct");
         document.querySelector("#check-answer").textContent = "You got it right!";
@@ -117,7 +121,7 @@ function clearStatusClass(element) {
 // Save score
 function saveScore() {
     document.getElementById("score-container").style.display = "inline-block";
-    document.getElementById("your-score").textContent =  score + " out of " + shuffledQuestions.length + " questions correct.";
+    document.getElementById("your-score").textContent =  "Your final score is " + timeLeft;
 }
 
 
@@ -127,20 +131,20 @@ function showHighScores(initials) {
     document.getElementById("high-scores").style.display = "inline-block";
   
     var initials = localStorage.getItem("initials");
-    var score = localStorage.getItem("score");
+    var score = localStorage.getItem("timeLeft");
   
     var initialsField = document.getElementById("initial1");
     var scoreField = document.getElementById("score1");
   
     initialsField.textContent = initials;
-    scoreField.textContent = score;
+    scoreField.textContent = timeLeft;
   
-    if (initials == null || score == null) {
+    if (initials == null || timeLeft == null) {
       document.getElementById("high-scores").style.display = "none";
       document.getElementById("no-scores").style.display = "inline-block";
     }
-     console.log(initials);
-     console.log(score);
+     //console.log(initials);
+     //console.log(timeLeft);
   };
 
   
@@ -151,6 +155,6 @@ submitButton.addEventListener("click", function (event) {
   event.preventDefault()
   var initials = document.querySelector("#initials-field").value;
   localStorage.setItem("initials", initials);
-  localStorage.setItem("score", score);
+  localStorage.setItem("timeLeft", timeLeft);
   showHighScores();
 });
