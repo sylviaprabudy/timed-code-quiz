@@ -24,6 +24,10 @@ a {
   text-decoration: none;
 }
 
+.centered {
+    text-align: center;
+}
+
 /* Header */
 header {
   display: flex;

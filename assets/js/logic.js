@@ -137,6 +137,7 @@ function saveScore() {
 function showHighScores(initials) {
     document.getElementById("highscores").classList.remove("hide")
     document.getElementById("score-container").classList.add("hide");
+    startContainerEl.classList.add("hide");
     questionContainerEl.classList.add("hide");
     var initials = localStorage.getItem("initials");
     var score = localStorage.getItem("timeLeft");
