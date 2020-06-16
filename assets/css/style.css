@@ -39,6 +39,7 @@ header {
 
 .scores a {
   color: var(--secondary-color);
+  cursor: pointer;
 }
 
 .scores a:hover {

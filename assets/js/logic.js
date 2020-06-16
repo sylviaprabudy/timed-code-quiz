@@ -72,7 +72,7 @@ function showQuestion(question) {
 // Reset state function
 function resetState() {
     //clearStatusClass(document.body)
-    //nextButton.classList.add("hide")
+    nextButton.classList.add("hide")
     checkAnswerEl.classList.add("hide")
     while (answerButtonsEl.firstChild) {
         answerButtonsEl.removeChild
@@ -127,8 +127,8 @@ function saveScore() {
 
 // Show high scores
 function showHighScores(initials) {
-    document.getElementById("highscores").style.display = "inline-block";
-    document.getElementById("high-scores").style.display = "inline-block";
+    document.getElementById("highscores").classList.remove("hide")
+    //document.getElementById("highscores").style.display = "inline-block";
   
     var initials = localStorage.getItem("initials");
     var score = localStorage.getItem("timeLeft");
@@ -140,8 +140,9 @@ function showHighScores(initials) {
     scoreField.textContent = timeLeft;
   
     if (initials == null || timeLeft == null) {
-      document.getElementById("high-scores").style.display = "none";
-      document.getElementById("no-scores").style.display = "inline-block";
+      //document.getElementById("high-scores").style.display = "none";
+      document.getElementById("no-scores").classList.remove("hide");
+      //document.getElementById("no-scores").style.display = "inline-block";
     }
      //console.log(initials);
      //console.log(timeLeft);
