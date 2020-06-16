@@ -27,7 +27,9 @@
             time by ten seconds. Your total score will be your time after you
             answer the last question. Click start when you are ready.
         </p>
-        <button id="start-btn" class="start-btn">Start Quiz</button>
+        <div class="controls">
+            <button id="start-btn" class="start-btn">Start Quiz</button>
+        </div>
     </section>
 
     <section id="question-container" class="hide">
@@ -47,7 +49,7 @@
     <section id="score-container" class="hide">
         <form id="submit-form">
             <h3 id="your-score"></h3>
-            <label id="initials-label">Enter your initials to save your score:</label>
+            <label id="initials-label">Enter your initials to save the score:</label>
             <input type="text" id="initials-field" maxlength="3" placeholder="Enter your initials" />
             <button id="submit-btn">Submit</button>
         </form>
@@ -60,7 +62,10 @@
                 <div id="initial1" class="initials"></div>
                 <div id="score1" class="score"></div>
             </div>
-            <h2>Refresh the page to begin.</h2>
+            <div class="controls">
+                <button id="go-back">Go back</button>
+                <button id="clear-score">Clear High Score</button>
+            </div>
         </div>
         <div id="no-scores" class="highscores-container hide">
             <h2>

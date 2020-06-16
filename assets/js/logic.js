@@ -19,11 +19,10 @@ function timer() {
     var timeInterval = setInterval(function () {
         timerEl.textContent = "Time: " + timeLeft;
         timeLeft--;
-        //console.log(timeLeft)
         if (timeLeft <= 0) {
             timerEl.textContent = "";
-            clearInterval(timeInterval);
-            saveScore();
+            //clearInterval(timeInterval);
+            //saveScore();
         }
     }, 1000);
     return timeLeft;
@@ -82,32 +81,40 @@ function resetState() {
 // Select answer function
 function selectAnswer(e) {
     var selectedButton = e.target;
+    //console.dir(selectedButton);
     var correct = selectedButton.dataset.correct;
-     //setStatusClass(document.body, correct);
+    checkAnswerEl.classList.remove("hide")
+    // Check if the answer correct or wrong then show text
+    if (correct) {
+        checkAnswerEl.innerHTML = "You got it right!";
+    } else {
+        // If the aswer is wrong, deduct time by 10
+        timeLeft -= 10;
+        checkAnswerEl.innerHTML = "Sorry that was not the correct answer.";
+    }
+
     Array.from(answerButtonsEl.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
+    
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
         nextButton.classList.remove("hide")
         checkAnswerEl.classList.remove("hide")
     } else {
         startButton.innerText = "Restart"
         startButton.classList.remove("hide")
+        saveScore();
+
     }
 }
 
-// Check and show the correct answer
+// Check and show the correct answer by set the buttons colors
 function setStatusClass(element, correct) {
     clearStatusClass(element)
-    console.log(correct);
     if (correct) {
         element.classList.add("correct");
-        document.querySelector("#check-answer").textContent = "You got it right!";
     } else {
-         // If the aswer is wrong, deduct time by 10
-        timeLeft -= 10;
         element.classList.add("wrong");
-        document.querySelector("#check-answer").textContent = "Sorry that was not the correct answer.";
     }
 }
 
@@ -117,11 +124,12 @@ function clearStatusClass(element) {
     element.classList.remove("wrong");
 }
 
+
 // Save score
 function saveScore() {
-    document.getElementById("score-container").classList.remove("hide");
     questionContainerEl.classList.add("hide");
-    document.getElementById("your-score").textContent =  "Your final score is " + timeLeft;
+    document.getElementById("score-container").classList.remove("hide");
+    document.getElementById("your-score").textContent = "Your final score is " + timeLeft;
 }
 
 
@@ -132,29 +140,29 @@ function showHighScores(initials) {
     questionContainerEl.classList.add("hide");
     var initials = localStorage.getItem("initials");
     var score = localStorage.getItem("timeLeft");
-  
+
     var initialsField = document.getElementById("initial1");
     var scoreField = document.getElementById("score1");
-  
+
     initialsField.textContent = initials;
     scoreField.textContent = timeLeft;
-  
-    if (initials == null || timeLeft == null) {
-      document.getElementById("no-scores").classList.remove("hide");
-      //document.getElementById("no-scores").style.display = "inline-block";
-    }
-     //console.log(initials);
-     //console.log(timeLeft);
-  };
 
-  
+    if (initials == null || timeLeft == null) {
+        document.getElementById("no-scores").classList.remove("hide");
+        //document.getElementById("no-scores").style.display = "inline-block";
+    }
+    //console.log(initials);
+    //console.log(timeLeft);
+};
+
+
 // View high scores link
 viewHighScores.addEventListener("click", showHighScores);
 
 submitButton.addEventListener("click", function (event) {
-  event.preventDefault()
-  var initials = document.querySelector("#initials-field").value;
-  localStorage.setItem("initials", initials);
-  localStorage.setItem("timeLeft", timeLeft);
-  showHighScores();
+    event.preventDefault()
+    var initials = document.querySelector("#initials-field").value;
+    localStorage.setItem("initials", initials);
+    localStorage.setItem("timeLeft", timeLeft);
+    showHighScores();
 });
