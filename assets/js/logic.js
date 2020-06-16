@@ -21,7 +21,6 @@ function timer() {
         timeLeft--;
         //console.log(timeLeft)
         if (timeLeft <= 0) {
-            console.log("You are out of time");
             timerEl.textContent = "";
             clearInterval(timeInterval);
             saveScore();
@@ -92,7 +91,7 @@ function selectAnswer(e) {
         nextButton.classList.remove("hide")
         checkAnswerEl.classList.remove("hide")
     } else {
-        //startButton.innerText = "Restart"
+        startButton.innerText = "Restart"
         startButton.classList.remove("hide")
     }
 }
@@ -120,7 +119,8 @@ function clearStatusClass(element) {
 
 // Save score
 function saveScore() {
-    document.getElementById("score-container").style.display = "inline-block";
+    document.getElementById("score-container").classList.remove("hide");
+    questionContainerEl.classList.add("hide");
     document.getElementById("your-score").textContent =  "Your final score is " + timeLeft;
 }
 
@@ -128,8 +128,8 @@ function saveScore() {
 // Show high scores
 function showHighScores(initials) {
     document.getElementById("highscores").classList.remove("hide")
-    //document.getElementById("highscores").style.display = "inline-block";
-  
+    document.getElementById("score-container").classList.add("hide");
+    questionContainerEl.classList.add("hide");
     var initials = localStorage.getItem("initials");
     var score = localStorage.getItem("timeLeft");
   
@@ -140,7 +140,6 @@ function showHighScores(initials) {
     scoreField.textContent = timeLeft;
   
     if (initials == null || timeLeft == null) {
-      //document.getElementById("high-scores").style.display = "none";
       document.getElementById("no-scores").classList.remove("hide");
       //document.getElementById("no-scores").style.display = "inline-block";
     }

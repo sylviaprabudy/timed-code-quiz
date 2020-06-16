@@ -107,3 +107,12 @@ button:hover {
   justify-content: center;
   align-items: center;
 }
+
+
+/* Highscores Page */
+.highscore {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 25px 0;
+}
