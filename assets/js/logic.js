@@ -1,5 +1,6 @@
 // Start the quiz with a timer set to 75. Timer left also will be the final score.
 var timeLeft = 75;
+var timerID;
 var timerEl = document.getElementById("timer");
 var startButton = document.getElementById("start-btn");
 var nextButton = document.getElementById("next-btn");
@@ -11,43 +12,43 @@ var checkAnswerEl = document.getElementById("check-answer");
 var viewHighScores = document.getElementById("highscores-link");
 var submitButton = document.getElementById("submit-btn");
 var clearScoreButton = document.getElementById("clear-btn");
+var initialsField = document.getElementById("player-name");
 var restartButton = document.getElementById("restart-btn");
+var scoreField = document.getElementById("player-score");
+var scores = [];
 
 var shuffledQuestions, currentQuestionIndex;
 
 
-// Countdown timer
-function timer() {
-    var timeInterval = setInterval(function () {
-        timeLeft--;
-        timerEl.textContent = "Time: " + timeLeft;
-
-        if (timeLeft <= 0) {
-            timerEl.textContent = "";
-            clearInterval(timeInterval);
-        }
-
-    }, 1000);
-    //return timeLeft;
-};
-
-
+// Start button trigger the first question and next button to display
 startButton.addEventListener("click", startGame);
 nextButton.addEventListener("click", () => {
     currentQuestionIndex++
     setNextQuestion()
 });
 
+// Countdown timer
+function timeTick() {
+    timeLeft--;
+    timerEl.textContent = "Time: " + timeLeft;
+
+    if (timeLeft <= 0) {
+        saveScore();
+    }
+}
+
 
 // Start Quiz
 function startGame() {
+    timerID = setInterval(timeTick, 1000);
+
     startContainerEl.classList.add("hide");
     shuffledQuestions = questions.sort(() => Math.random() - .5)
     currentQuestionIndex = 0
     questionContainerEl.classList.remove("hide");
 
     // Timer will start as soon as start button is clicked
-    timer();
+    timeTick();
     setNextQuestion();
 };
 
@@ -127,6 +128,7 @@ function setStatusClass(element, correct) {
     }
 };
 
+
 // Remove all the classes
 function clearStatusClass(element) {
     element.classList.remove("correct");
@@ -134,12 +136,41 @@ function clearStatusClass(element) {
 };
 
 
-// Save score
+// Save scores
 function saveScore() {
+    localStorage.setItem("scores", JSON.stringify(scores));
     questionContainerEl.classList.add("hide");
     document.getElementById("score-container").classList.remove("hide");
     document.getElementById("your-score").textContent = "Your final score is " + timeLeft;
+    clearInterval(timerID);
 };
+
+
+var loadScores = function () {
+    // Get score from local storage
+    var savedScores = localStorage.getItem("scores") || []
+    if (!savedScores) {
+        return false;
+    }
+
+    // Convert scores from stringfield format into array
+    savedScores = JSON.parse(savedScores);
+    var initials = document.querySelector("#initials-field").value;
+    var newScore = {
+        score: timeLeft,
+        initials: initials
+    }
+    savedScores.push(newScore);
+    console.log(savedScores)
+    window.localStorage.setItem("scores", JSON.stringify(savedScores));
+
+    savedScores.forEach(score => {
+        initialsField.innerText = score.initials
+        scoreField.innerText = score.score
+    })
+};
+
+//loadScores();
 
 
 // Show high scores
@@ -148,11 +179,8 @@ function showHighScores(initials) {
     document.getElementById("score-container").classList.add("hide");
     startContainerEl.classList.add("hide");
     questionContainerEl.classList.add("hide");
-    var initials = localStorage.getItem("initials");
-    var score = localStorage.getItem("timeLeft");
-
-    var initialsField = document.getElementById("player-name");
-    var scoreField = document.getElementById("player-score");
+    //var initials = localStorage.getItem("initials");
+    //var score = localStorage.getItem("timeLeft");
 
     initialsField.textContent = initials;
     scoreField.textContent = timeLeft;
@@ -163,15 +191,18 @@ function showHighScores(initials) {
 };
 
 
+
 // View high scores link
 viewHighScores.addEventListener("click", showHighScores);
 
 submitButton.addEventListener("click", function (event) {
     event.preventDefault()
     var initials = document.querySelector("#initials-field").value;
-    localStorage.setItem("initials", initials);
-    localStorage.setItem("timeLeft", timeLeft);
-    showHighScores();
+    // localStorage.setItem("initials", initials);
+    // localStorage.setItem("timeLeft", timeLeft);
+    showHighScores(initials);
+
+
 });
 
 
