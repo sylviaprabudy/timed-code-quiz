@@ -10,47 +10,54 @@ var answerButtonsEl = document.getElementById("answer-buttons");
 var checkAnswerEl = document.getElementById("check-answer");
 var viewHighScores = document.getElementById("highscores-link");
 var submitButton = document.getElementById("submit-btn");
-
+var clearScoreButton = document.getElementById("clear-btn");
+var restartButton = document.getElementById("restart-btn");
 
 var shuffledQuestions, currentQuestionIndex;
+
 
 // Countdown timer
 function timer() {
     var timeInterval = setInterval(function () {
-        timerEl.textContent = "Time: " + timeLeft;
         timeLeft--;
+        timerEl.textContent = "Time: " + timeLeft;
+
         if (timeLeft <= 0) {
             timerEl.textContent = "";
-            //clearInterval(timeInterval);
-            //saveScore();
+            clearInterval(timeInterval);
         }
+
     }, 1000);
-    return timeLeft;
-}
+    //return timeLeft;
+};
+
 
 startButton.addEventListener("click", startGame);
 nextButton.addEventListener("click", () => {
     currentQuestionIndex++
     setNextQuestion()
-})
+});
+
 
 // Start Quiz
 function startGame() {
-    //startButton.classList.add("hide");
     startContainerEl.classList.add("hide");
     shuffledQuestions = questions.sort(() => Math.random() - .5)
     currentQuestionIndex = 0
     questionContainerEl.classList.remove("hide");
+
     // Timer will start as soon as start button is clicked
     timer();
     setNextQuestion();
-}
+};
+
 
 // Go to next question
 function setNextQuestion() {
     resetState();
     showQuestion(shuffledQuestions[currentQuestionIndex]);
-}
+};
+
 
 // Display questions
 function showQuestion(question) {
@@ -65,7 +72,8 @@ function showQuestion(question) {
         button.addEventListener("click", selectAnswer)
         answerButtonsEl.appendChild(button)
     })
-}
+};
+
 
 // Reset state function
 function resetState() {
@@ -76,7 +84,8 @@ function resetState() {
         answerButtonsEl.removeChild
             (answerButtonsEl.firstChild)
     }
-}
+};
+
 
 // Select answer function
 function selectAnswer(e) {
@@ -96,17 +105,17 @@ function selectAnswer(e) {
     Array.from(answerButtonsEl.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
-    
+
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
         nextButton.classList.remove("hide")
         checkAnswerEl.classList.remove("hide")
     } else {
-        startButton.innerText = "Restart"
         startButton.classList.remove("hide")
         saveScore();
 
     }
-}
+};
+
 
 // Check and show the correct answer by set the buttons colors
 function setStatusClass(element, correct) {
@@ -116,13 +125,13 @@ function setStatusClass(element, correct) {
     } else {
         element.classList.add("wrong");
     }
-}
+};
 
 // Remove all the classes
 function clearStatusClass(element) {
     element.classList.remove("correct");
     element.classList.remove("wrong");
-}
+};
 
 
 // Save score
@@ -130,7 +139,7 @@ function saveScore() {
     questionContainerEl.classList.add("hide");
     document.getElementById("score-container").classList.remove("hide");
     document.getElementById("your-score").textContent = "Your final score is " + timeLeft;
-}
+};
 
 
 // Show high scores
@@ -142,18 +151,15 @@ function showHighScores(initials) {
     var initials = localStorage.getItem("initials");
     var score = localStorage.getItem("timeLeft");
 
-    var initialsField = document.getElementById("initial1");
-    var scoreField = document.getElementById("score1");
+    var initialsField = document.getElementById("player-name");
+    var scoreField = document.getElementById("player-score");
 
     initialsField.textContent = initials;
     scoreField.textContent = timeLeft;
 
     if (initials == null || timeLeft == null) {
         document.getElementById("no-scores").classList.remove("hide");
-        //document.getElementById("no-scores").style.display = "inline-block";
     }
-    //console.log(initials);
-    //console.log(timeLeft);
 };
 
 
@@ -167,3 +173,16 @@ submitButton.addEventListener("click", function (event) {
     localStorage.setItem("timeLeft", timeLeft);
     showHighScores();
 });
+
+
+// Restart or reload the page
+restartButton.addEventListener('click', function () {
+    window.location.reload();
+});
+
+
+// Clear localStorage items 
+clearScoreButton.addEventListener('click', function () {
+    localStorage.clear();
+});
+
