@@ -138,11 +138,14 @@ function clearStatusClass(element) {
 
 // Save scores
 function saveScore() {
-    localStorage.setItem("scores", JSON.stringify(scores));
-    questionContainerEl.classList.add("hide");
-    document.getElementById("score-container").classList.remove("hide");
-    document.getElementById("your-score").textContent = "Your final score is " + timeLeft;
     clearInterval(timerID);
+    setTimeout(function () {
+        localStorage.setItem("scores", JSON.stringify(scores));
+        questionContainerEl.classList.add("hide");
+        document.getElementById("score-container").classList.remove("hide");
+        document.getElementById("your-score").textContent = "Your final score is " + timeLeft;
+        
+    }, 2000)
 };
 
 
