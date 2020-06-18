@@ -15,7 +15,7 @@ var clearScoreButton = document.getElementById("clear-btn");
 var initialsField = document.getElementById("player-name");
 var restartButton = document.getElementById("restart-btn");
 var scoreField = document.getElementById("player-score");
-var scores = [];
+var scores = JSON.parse(localStorage.getItem("scores")) || [];
 
 var shuffledQuestions, currentQuestionIndex;
 
@@ -27,11 +27,11 @@ nextButton.addEventListener("click", () => {
     setNextQuestion()
 });
 
+
 // Countdown timer
 function timeTick() {
     timeLeft--;
     timerEl.textContent = "Time: " + timeLeft;
-
     if (timeLeft <= 0) {
         saveScore();
     }
@@ -41,7 +41,6 @@ function timeTick() {
 // Start Quiz
 function startGame() {
     timerID = setInterval(timeTick, 1000);
-
     startContainerEl.classList.add("hide");
     shuffledQuestions = questions.sort(() => Math.random() - .5)
     currentQuestionIndex = 0
@@ -140,18 +139,18 @@ function clearStatusClass(element) {
 function saveScore() {
     clearInterval(timerID);
     setTimeout(function () {
-        localStorage.setItem("scores", JSON.stringify(scores));
+        //localStorage.setItem("scores", JSON.stringify(scores));
         questionContainerEl.classList.add("hide");
         document.getElementById("score-container").classList.remove("hide");
         document.getElementById("your-score").textContent = "Your final score is " + timeLeft;
-        
+
     }, 2000)
 };
 
 
 var loadScores = function () {
     // Get score from local storage
-    var savedScores = localStorage.getItem("scores") || []
+
     if (!savedScores) {
         return false;
     }
@@ -165,7 +164,6 @@ var loadScores = function () {
     }
     savedScores.push(newScore);
     console.log(savedScores)
-    window.localStorage.setItem("scores", JSON.stringify(savedScores));
 
     savedScores.forEach(score => {
         initialsField.innerText = score.initials
@@ -182,17 +180,28 @@ function showHighScores(initials) {
     document.getElementById("score-container").classList.add("hide");
     startContainerEl.classList.add("hide");
     questionContainerEl.classList.add("hide");
-    //var initials = localStorage.getItem("initials");
-    //var score = localStorage.getItem("timeLeft");
+    var score = {
+        initials, timeLeft
+    }
+    scores.push(score)
+    console.log(scores)
+    for (i = 0; i < scores.length; i++) {
+        var div1 = document.createElement("div");
+        div1.setAttribute("class", "name-div");
+        div1.innerText = scores[i].initials;
+        var div2 = document.createElement("div");
+        div2.setAttribute("class", "score-div");
+        div2.innerText = scores[i].timeLeft;
+        var highScoreEl = document.getElementById("highscore");
+        highScoreEl.appendChild(div1);
+        highScoreEl.appendChild(div2);
+    }
 
-    initialsField.textContent = initials;
-    scoreField.textContent = timeLeft;
-
+    localStorage.setItem("scores", JSON.stringify(scores));
     if (initials == null || timeLeft == null) {
         document.getElementById("no-scores").classList.remove("hide");
     }
 };
-
 
 
 // View high scores link
@@ -201,22 +210,19 @@ viewHighScores.addEventListener("click", showHighScores);
 submitButton.addEventListener("click", function (event) {
     event.preventDefault()
     var initials = document.querySelector("#initials-field").value;
-    // localStorage.setItem("initials", initials);
-    // localStorage.setItem("timeLeft", timeLeft);
     showHighScores(initials);
-
-
 });
 
 
 // Restart or reload the page
-restartButton.addEventListener('click', function () {
+restartButton.addEventListener("click", function () {
     window.location.reload();
 });
 
 
 // Clear localStorage items 
-clearScoreButton.addEventListener('click', function () {
+clearScoreButton.addEventListener("click", function () {
     localStorage.clear();
+    document.getElementById("highscore").innerHTML = "";
 });
 

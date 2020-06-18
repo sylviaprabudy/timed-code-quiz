@@ -25,7 +25,7 @@ a {
 }
 
 .centered {
-    text-align: center;
+  text-align: center;
 }
 
 /* Header */
@@ -114,29 +114,36 @@ button:hover {
 }
 
 /* Enter your initial */
-input[type=text] {
-    padding: 10px;
-    margin: 8px 0;
-    border: 1px solid var(--tertiary-color);
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
+input[type="text"] {
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid var(--tertiary-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
 
 /* Highscores Page */
 .highscore {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin: 25px 0;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.name-div,
+.score-div {
+  flex: 1 35%;
+  padding: 10px 0;
+  border: 1px solid var(--correct-color);
+  margin-top: -0.5px;
+  margin-left: -0.5px;
 }
 
 /*** MEDIA QUERY FOR MOBILE PHONES AND SMALLER ***/
 /* this will be applied on any screen smaller than 575px */
 @media screen and (max-width: 575px) {
-    .btn-grid {
-        grid-template-columns: repeat(1, auto);
-        gap: 0;
-        margin: 0;
-    }
+  .btn-grid {
+    grid-template-columns: repeat(1, auto);
+    gap: 0;
+    margin: 0;
+  }
 }
