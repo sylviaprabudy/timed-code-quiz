@@ -171,8 +171,6 @@ var loadScores = function () {
     })
 };
 
-//loadScores();
-
 
 // Show high scores
 function showHighScores(initials) {
@@ -198,14 +196,16 @@ function showHighScores(initials) {
     }
 
     localStorage.setItem("scores", JSON.stringify(scores));
-    if (initials == null || timeLeft == null) {
-        document.getElementById("no-scores").classList.remove("hide");
-    }
+    
+    // if (initials == null || timeLeft == null) {
+    //     document.getElementById("no-scores").classList.remove("hide");
+    // }
 };
 
 
 // View high scores link
 viewHighScores.addEventListener("click", showHighScores);
+
 
 submitButton.addEventListener("click", function (event) {
     event.preventDefault()
