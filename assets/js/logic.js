@@ -178,11 +178,13 @@ function showHighScores(initials) {
     document.getElementById("score-container").classList.add("hide");
     startContainerEl.classList.add("hide");
     questionContainerEl.classList.add("hide");
-    var score = {
-        initials, timeLeft
+    if (typeof initials == "string") {
+        var score = {
+            initials, timeLeft
+        }
+        scores.push(score)
     }
-
-    scores.push(score)
+ 
     var highScoreEl = document.getElementById("highscore");
     highScoreEl.innerHTML = "";
     //console.log(scores)
