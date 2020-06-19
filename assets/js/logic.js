@@ -181,8 +181,11 @@ function showHighScores(initials) {
     var score = {
         initials, timeLeft
     }
+
     scores.push(score)
-    console.log(scores)
+    var highScoreEl = document.getElementById("highscore");
+    highScoreEl.innerHTML = "";
+    //console.log(scores)
     for (i = 0; i < scores.length; i++) {
         var div1 = document.createElement("div");
         div1.setAttribute("class", "name-div");
@@ -190,7 +193,7 @@ function showHighScores(initials) {
         var div2 = document.createElement("div");
         div2.setAttribute("class", "score-div");
         div2.innerText = scores[i].timeLeft;
-        var highScoreEl = document.getElementById("highscore");
+       
         highScoreEl.appendChild(div1);
         highScoreEl.appendChild(div2);
     }
