@@ -112,7 +112,6 @@ function selectAnswer(e) {
     } else {
         startButton.classList.remove("hide")
         saveScore();
-
     }
 };
 
@@ -138,6 +137,7 @@ function clearStatusClass(element) {
 // Save scores
 function saveScore() {
     clearInterval(timerID);
+    timerEl.textContent = "Time: " + timeLeft;
     setTimeout(function () {
         //localStorage.setItem("scores", JSON.stringify(scores));
         questionContainerEl.classList.add("hide");
@@ -202,9 +202,6 @@ function showHighScores(initials) {
 
     localStorage.setItem("scores", JSON.stringify(scores));
     
-    // if (initials == null || timeLeft == null) {
-    //     document.getElementById("no-scores").classList.remove("hide");
-    // }
 };
 
 
@@ -230,4 +227,3 @@ clearScoreButton.addEventListener("click", function () {
     localStorage.clear();
     document.getElementById("highscore").innerHTML = "";
 });
-
