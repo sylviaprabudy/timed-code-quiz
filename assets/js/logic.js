@@ -97,9 +97,13 @@ function selectAnswer(e) {
     if (correct) {
         checkAnswerEl.innerHTML = "You got it right!";
     } else {
-        // If the aswer is wrong, deduct time by 10
-        timeLeft -= 10;
         checkAnswerEl.innerHTML = "Sorry that was not the correct answer.";
+        if (timeLeft <= 10) {
+            timeLeft = 0;
+        } else {
+            // If the aswer is wrong, deduct time by 10
+            timeLeft -= 10;
+        }
     }
 
     Array.from(answerButtonsEl.children).forEach(button => {
@@ -184,7 +188,7 @@ function showHighScores(initials) {
         }
         scores.push(score)
     }
- 
+
     var highScoreEl = document.getElementById("highscore");
     highScoreEl.innerHTML = "";
     //console.log(scores)
@@ -195,13 +199,13 @@ function showHighScores(initials) {
         var div2 = document.createElement("div");
         div2.setAttribute("class", "score-div");
         div2.innerText = scores[i].timeLeft;
-       
+
         highScoreEl.appendChild(div1);
         highScoreEl.appendChild(div2);
     }
 
     localStorage.setItem("scores", JSON.stringify(scores));
-    
+
 };
 
 
