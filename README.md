@@ -1,5 +1,9 @@
 # Time Code Quiz - Web APIs Challenge
-a timed multiple-choice quiz on JavaScript fundamentals that stores high scores
+
+## Description
+A timed multiple-choice quiz on JavaScript fundamentals that stores high scores in localStorage. 
+
+## URL : https://sylviaprabudy.github.io/timed-code-quiz/
 
 ## User Story
 - AS A coding boot camp student
@@ -20,3 +24,7 @@ a timed multiple-choice quiz on JavaScript fundamentals that stores high scores
 - THEN I can save my initials and score
 
 ![](assets/images/04-web-apis-homework-demo.gif)
+
+## Contributor:
+Sylvia Prabudy ©2020 All Rights Reserved.
+---
