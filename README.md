@@ -3,7 +3,7 @@
 ## Description
 A timed multiple-choice quiz on JavaScript fundamentals that stores high scores in localStorage. 
 
-## URL : https://sylviaprabudy.github.io/timed-code-quiz/
+### URL : https://sylviaprabudy.github.io/timed-code-quiz/
 
 ## User Story
 - AS A coding boot camp student
@@ -27,4 +27,4 @@ A timed multiple-choice quiz on JavaScript fundamentals that stores high scores 
 
 ## Contributor:
 Sylvia Prabudy ©2020 All Rights Reserved.
----
+- - -
